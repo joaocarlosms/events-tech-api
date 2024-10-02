@@ -1,33 +1,37 @@
-package domain.event;
+package domain.coupon;
 
 import java.util.Date;
 import java.util.UUID;
 
+import domain.event.Event;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "event")
+@Table(name = "coupon")
 @Entity
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Event {
-	
+public class Coupon {
+
 	@Id
 	@GeneratedValue
 	private UUID id;
 	
-	private String title;
-	private String description;
-	private String imageUrl;
-	private String eventUrl;
-	private Boolean remote;
-	private Date date;
+	private String code;
+	private Integer discount;
+	private Date valid_date;
+	
+	@ManyToOne
+	@JoinColumn(name = "event_id")
+	private Event event;
 }
